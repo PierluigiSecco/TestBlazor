@@ -23,10 +23,10 @@ public class ProductService : IProductService
     public async Task<ServiceResponse<Product>> GetProductById(int productId)
     {
         var product = await _dataContext.Products.SingleOrDefaultAsync(x => x.Id ==  productId);
+
         return new ServiceResponse<Product>()
         {
-            Data = product,
-            Message = "Sorry, product not found"
+            Data = product
         };
     }
 }
