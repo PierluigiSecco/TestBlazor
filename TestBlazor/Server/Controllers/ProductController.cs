@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TestBlazor.Server.Data;
+using TestBlazor.Server.Services.ProductService;
 
 namespace TestBlazor.Server.Controllers;
 
@@ -7,16 +7,18 @@ namespace TestBlazor.Server.Controllers;
 [ApiController]
 public class ProductController : ControllerBase
 {
-    private readonly DataContext _dataContext;
+    private readonly IProductService _productService;
 
-    public ProductController(DataContext dataContext)
+    public ProductController(IProductService productService)
     {
-        _dataContext = dataContext;
+        _productService = productService;
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllProducts()
+    public async Task<ActionResult<List<Product>>> GetAllProducts()
     {
-        return Ok(await _dataContext.Products.ToListAsync());
+        var products = await _productService.GetProducts();
+        
+        return Ok(products);
     }
 }
