@@ -29,16 +29,4 @@ public class ProductService : IProductService
             Data = product
         };
     }
-
-    public async Task<ServiceResponse<List<Product>>> GetProductByCategory(string categoryUrl)
-    {
-        var products = await _dataContext.Products
-            .Where(x => x.Category.Url.ToLower().Equals(categoryUrl.ToLower()))
-            .ToListAsync();
-
-        return new ServiceResponse<List<Product>>
-        {
-            Data = products
-        };
-    }
 }
