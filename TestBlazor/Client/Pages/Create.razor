@@ -1,0 +1,22 @@
+﻿@page "/create"
+
+        <EditForm Model="@newRuolo" OnValidSubmit="CreateNewRuolo">
+            <div>
+                <label for="title" class="mb-1">Title</label>
+                <InputText id="title" @bind-Value="newRuolo.Ruolo" class="form-control mb-2"/>
+                <label for="title" class="mb-1">Title</label>
+                <InputText id="title" @bind-Value="newRuolo.Ruolo" class="form-control mb-2" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+
+
+@code {
+    Ruoli newRuolo = new Ruoli();
+
+    void CreateNewRuolo()
+    {
+        Console.WriteLine("Ruolo created");
+    }
+}

@@ -1,9 +1,14 @@
 ﻿@inject IProductService ProductService
+@implements IDisposable
 
 @if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
-    <span>Loading Products...</span>
+
+    <div id="example-div" class="d-flex align-items-center justify-content-center" style="height: 85vh">
+        <DisplayRing/>
+    </div>
 }
+
 else{
     <ul class="list-unstyled">
         @foreach (var product in ProductService.Products)
@@ -29,9 +34,15 @@ else{
 
 @code {
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        await ProductService.GetProducts();
+    //await ProductService.GetProducts();
+        ProductService.ProductChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ProductService.ProductChanged -= StateHasChanged;
     }
 
 }
