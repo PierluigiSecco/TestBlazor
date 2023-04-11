@@ -47,6 +47,8 @@ public class ProductService : IProductService
         _dataContext.Products.Add(product);
         await _dataContext.SaveChangesAsync();
 
+        product.Category = await _dataContext.Categories.FirstOrDefaultAsync(x => x.Id == product.CategoryId);
+
         return product;
     }
 }

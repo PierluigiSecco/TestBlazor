@@ -42,10 +42,13 @@
 
     async Task CreateNewProduct()
     {
-        Console.WriteLine("Create new Product");
-        Console.WriteLine(newProduct.Title);
-        //var result = await ProductService.CreateNewProduct(newProduct);
-        //NavigationManager.NavigateTo($"/products/{result.Id}");
+        //Console.WriteLine("Create new Product");
+        //Console.WriteLine(newProduct.Title);
+        var result = await ProductService.CreateNewProduct(newProduct);
+        Console.WriteLine(result.Title);
+        Console.WriteLine(result.Description);
+        Console.WriteLine(result.Price);
+        NavigationManager.NavigateTo("/");
     }
 
     protected override async Task OnInitializedAsync()
