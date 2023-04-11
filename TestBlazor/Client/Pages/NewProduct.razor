@@ -1,0 +1,56 @@
+﻿@page "/newProduct"
+@inject ICategoryService CategoryService
+@inject IProductService ProductService
+@inject NavigationManager NavigationManager
+
+<h3>New Product</h3>
+
+<EditForm Model="@newProduct" OnValidSubmit="CreateNewProduct">
+    <DataAnnotationsValidator/>
+    <label for="title">Title</label>
+    <InputText id="title" @bind-Value="newProduct.Title" class="form-control"/>
+    <ValidationMessage For=@(() => newProduct.Title)/>
+
+    <label for="description">Description</label>
+    <InputTextArea id="description" @bind-Value="newProduct.Description" class="form-control"/>
+    <ValidationMessage For=@(() => newProduct.Description) />
+
+    <label for="imageUrl">Image</label>
+    <InputText id="imageUrl" @bind-Value="newProduct.ImageUrl" class="form-control"/>
+
+
+    <label for="price">Price</label>
+    <InputNumber id="price" @bind-Value="newProduct.Price" class="form-control"/>
+
+    <label for="category">Category</label>
+    <InputSelect class="form-select" @bind-Value="newProduct.CategoryId">
+        <option value="0" selected>Choose Category</option>
+        @foreach (var category in CategoryService.Categories)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </InputSelect>
+
+    <button class="btn btn-primary mt-2" type="submit">New Product</button>
+    <button class="btn btn-danger mt-2" type="reset">Cancel</button>
+
+    @*<ValidationSummary/>*@
+</EditForm>
+
+@code {
+    Product newProduct = new Product();
+
+    async Task CreateNewProduct()
+    {
+        Console.WriteLine("Create new Product");
+        Console.WriteLine(newProduct.Title);
+        //var result = await ProductService.CreateNewProduct(newProduct);
+        //NavigationManager.NavigateTo($"/products/{result.Id}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CategoryService.GetCategories();
+        Console.WriteLine(CategoryService.Categories);
+    }
+}

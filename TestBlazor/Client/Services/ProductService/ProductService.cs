@@ -33,4 +33,11 @@ public class ProductService : IProductService
 
         return response;
     }
+
+    public async Task<Product> CreateNewProduct(Product product)
+    {
+        var result = await _http.PostAsJsonAsync("api/product", product);
+
+        return await result.Content.ReadFromJsonAsync<Product>() ?? throw new InvalidOperationException();
+    }
 }

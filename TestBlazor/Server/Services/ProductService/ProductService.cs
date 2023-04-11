@@ -41,4 +41,12 @@ public class ProductService : IProductService
             Data = products
         };
     }
+
+    public async Task<Product> CreateProduct(Product product)
+    {
+        _dataContext.Products.Add(product);
+        await _dataContext.SaveChangesAsync();
+
+        return product;
+    }
 }

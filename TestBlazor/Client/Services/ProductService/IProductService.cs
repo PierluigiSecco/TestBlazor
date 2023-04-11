@@ -9,4 +9,5 @@ public interface IProductService
 
     Task GetProducts(string? categoryUrl = null);
     Task<ServiceResponse<Product>> GetProduct(int id);
+    Task<Product> CreateNewProduct(Product product);
 }
