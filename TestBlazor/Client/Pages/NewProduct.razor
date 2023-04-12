@@ -9,11 +9,11 @@
     <DataAnnotationsValidator/>
     <label for="title">Title</label>
     <InputText id="title" @bind-Value="newProduct.Title" class="form-control"/>
-    <ValidationMessage For=@(() => newProduct.Title)/>
+    <ValidationMessage For="@(() => newProduct.Title)"/>
 
     <label for="description">Description</label>
     <InputTextArea id="description" @bind-Value="newProduct.Description" class="form-control"/>
-    <ValidationMessage For=@(() => newProduct.Description) />
+    <ValidationMessage For="@(() => newProduct.Description)" />
 
     <label for="imageUrl">Image</label>
     <InputText id="imageUrl" @bind-Value="newProduct.ImageUrl" class="form-control"/>

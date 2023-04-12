@@ -1,10 +1,23 @@
 ﻿@page "/"
+@attribute [Authorize]
 @page "/{categoryUrl}"
+@using Microsoft.AspNetCore.Authorization
 @inject IProductService ProductService
 
 <PageTitle>Test Blazor Home</PageTitle>
 
 <RuoliList />
+
+<AuthorizeView>
+    <Authorized>
+        <p>You are authorized.. @context.User.Claims.ToString()</p>
+    </Authorized>
+
+    <NotAuthorized>
+        <p>You are not authorized</p>
+    </NotAuthorized>
+</AuthorizeView>
+
 
 @code
 {
